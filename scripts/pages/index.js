@@ -19,7 +19,7 @@
                     photographers
                 }
             }
-            // ça affiche donc les data dans console/log
+            // en cas d'erreur d'affichage
             catch (err) {
                 return {
                     data: 'There was an error!'
@@ -81,7 +81,7 @@
             photographersSection.appendChild(photographerUserCard);
         });
     };
-    // RECUPERE LES DONNEES ET LES TRANSFORME POUR FACTORY
+    // RECUPERE LES DONNEES ET LES AFFICHE VIA FACTORY
     async function init() {
         // Récupère les datas des photographes
         const {
