@@ -1,7 +1,7 @@
-    // FONCTION LINK ENTRE DATA PHOTOGRAPHERS ET FACTORIES
+    // 1 - FONCTION LINK ENTRE DATA PHOTOGRAPHERS ET FACTORIES
     const getPhotographersData =
         // on créer une fonction
-        async function () {
+        async function () { // attendre un retour (def)
             try {
                 // on ajoute une asynchrone function pour lui ajouter une promesse
                 await fetch("/data/photographersData.json")
@@ -27,61 +27,25 @@
             }
         };
 
-    // on fait le return de la valeur de la fonction  car une fonction doit toujours retourner qq chose
-    // si on fait pas un return, la fonction se lance en continue et ça bug tout
 
-    // AUTRES TEST FETCH
-    // await pour attendre l'analyse totale des data avant d'envoyer > parser les données / attendre conversion du json en objet
-    // let data = await fetch("/data/photographersData.json")
-    //     .then(
-    //         // ici on retourne une promesse en json
-    //         function (response) {
-    //             return response.json();
-    //         }
-    //     )
-    //     .then(
-    //         function (data) {
-    // photographers = [{
-    //         "name": "Ma data test",
-    //         "id": 1,
-    //         "city": "Paris",
-    //         "country": "France",
-    //         "tagline": "Ceci est ma data test",
-    //         "price": 400,
-    //         "portrait": "account.png"
-    //     },
-    //     {
-    //         "name": "Autre data test",
-    //         "id": 2,
-    //         "city": "Londres",
-    //         "country": "UK",
-    //         "tagline": "Ceci est ma data test 2",
-    //         "price": 500,
-    //         "portrait": "account.png"
-    //     },
-    // ]
-    //             }
-    //         )
-
-    //     // et bien retourner le tableau photographers seulement une fois
-    //     return ({
-    //         photographers: [...photographers, ...photographers, ...photographers]
-    //     })
-    // }
-
-
-    // FONCTION LINK ENTRE FACTORIES ET LE HTML
-
+    // 2 - FONCTION LINK ENTRE FACTORIES ET INIT
+    // je créé une fonction qui attend le retour de l'init pour afficher les données
+    // fonction d'affichage lié à photographers défini dans photographerFactories
     async function displayPhotographersData(photographers) {
+        // var qui va dans la div photographer_section
         const photographersSection = document.querySelector(".photographer_section");
-
+        // pour chaque donnée dans photographers on définié un photographer 
         photographers.forEach((photographer) => {
+            // var de création de model et le lier au factory de photographers
             const photographerModel = photographerFactory(photographer);
+            // variable qui relie l'affichage du factory portrait
             const photographerUserCard = photographerModel.getPhotographerPortrait();
+            // appendchild qui affiche les données définies dans getphotographerPortrait dans photographer_section
             photographersSection.appendChild(photographerUserCard);
         });
     };
-    // RECUPERE LES DONNEES ET LES AFFICHE VIA FACTORY
+    // 3 - FONCTION LINK ENTRE INIT ET AFFICHAGE HTML
+    //  init est appelé après que toutes les déclarations de variables du package ont évalué leurs initialiseurs, et ceux-ci ne sont évalués qu'après que tous les packages importés ont été initialisés.
     async function init() {
         // Récupère les datas des photographes
         const {
