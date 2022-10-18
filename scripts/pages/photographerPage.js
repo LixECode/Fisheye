@@ -14,10 +14,12 @@ const id = urlSearchParams.get("id")
 console.log(id)
 
 // 2 - CREATION FETCH ASYNC POUR LINK DATA AU JS
-const getMediaData =
+const getPhotographerPageData =
     // on créer une fonction
     async function () { // attendre un retour (def)
         try {
+            let media = [];
+            let photographers = [];
             // on ajoute une asynchrone function pour lui ajouter une promesse
             await fetch("/data/photographersData.json")
                 // si la variable response renvoie au data json
@@ -44,13 +46,26 @@ const getMediaData =
         }
     };
 
+// 3 - FONCTION LINK ENTRE INIT ET AFFICHAGE HTML
+//  init est appelé après que toutes les déclarations de variables du package ont évalué leurs initialiseurs, et ceux-ci ne sont évalués qu'après que tous les packages importés ont été initialisés.
+async function init() {
+    // Récupère les datas des photographes
+    const {
+        media,
+        photographers
+    } = await getPhotographerPageData();
+    displayPhotographerPageData(media, photographers);
+};
+
+init();
+
 // 2 - FONCTION LINK ENTRE FACTORIES ET INIT
 // je créé une fonction qui attend le retour de l'init pour afficher les données
 // fonction d'affichage lié à photographers défini dans photographerFactories
-async function displayMediaData(media, photographers) {
+async function displayPhotographerPageData(media, photographers) {
     // var qui va dans la div photographer_header
     const photographerHeader = document.querySelector(".photographer-header");
-    console.log(id)
+    console.log(photographerHeader)
 
     // 2.1 - DISPLAY PHOTOGRAPHER HEADER FACTORY
     // .find calls a function searching the id linked to our variable Url on top of here
@@ -61,20 +76,10 @@ async function displayMediaData(media, photographers) {
     // our variable is the id inside the photographerFactory
     const photographerModelHeader = photographerFactory(photographerId);
     // our variable need to .get medias of PortraitPhotographer
-    const photographerPortrait = photographerModelHeader.getPhotographerPortrait();
+    const photographerPortrait = photographerModelHeader.getPhotographerHeader();
     // .appenchild displays all 
     photographerHeader.appendChild(photographerPortrait);
-};
 
-// 3 - FONCTION LINK ENTRE INIT ET AFFICHAGE HTML
-//  init est appelé après que toutes les déclarations de variables du package ont évalué leurs initialiseurs, et ceux-ci ne sont évalués qu'après que tous les packages importés ont été initialisés.
-async function init() {
-    // Récupère les datas des photographes
-    const {
-        media,
-        photographers
-    } = await getMediaData();
-    displayMediaData(media, photographers);
-};
+    // FILTER MENU
 
-init();
+};
