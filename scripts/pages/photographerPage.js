@@ -10,8 +10,8 @@ console.log(queryStringUrlId);
 // il créé un objet / lie à un autre objet protype / le nouvel objet est .this / si function don't return, c'est this
 const urlSearchParams = new URLSearchParams(queryStringUrlId);
 console.log(urlSearchParams);
-const id = urlSearchParams.get("id")
-console.log(id)
+const urlId = urlSearchParams.get("id")
+console.log(urlId)
 
 // 2 - CREATION FETCH ASYNC POUR LINK DATA AU JS
 const getPhotographerPageData =
@@ -70,7 +70,7 @@ async function displayPhotographerPageData(media, photographers) {
     // 2.1 - DISPLAY PHOTOGRAPHER HEADER FACTORY
     // .find calls a function searching the id linked to our variable Url on top of here
     const photographerId = photographers.find(function (findIdPhotographer) {
-        return findIdPhotographer.id == id;
+        return findIdPhotographer.id == urlId;
     });
     console.log(photographerId)
     // our variable is the id inside the photographerFactory
@@ -81,5 +81,20 @@ async function displayPhotographerPageData(media, photographers) {
     photographerHeader.appendChild(photographerPortrait);
 
     // FILTER MENU
+
+    //MEDIA CONTAINER
+    const photographerMediaArticle = media.filter(function (findMedia) {
+        // ici on dit que le retour du photographerID doit être celui du search params id
+        return findMedia.photographerId == urlId;
+    });
+    console.log(photographerMediaArticle)
+    const photographersMediaContainer = document.querySelector(".photographer-medias-container")
+    // we use for each to display the exact number of media for each ID. no need to create 10 articles balise in html.
+    photographerMediaArticle.forEach(function (e) {
+        const photographerMediasContainerModel = mediaFactory(e);
+        const PhotographerMediaContainerUser = photographerMediasContainerModel.getMediaFactory();
+        photographersMediaContainer.appendChild(PhotographerMediaContainerUser);
+    });
+
 
 };

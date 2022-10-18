@@ -92,6 +92,72 @@
 
 /* MEDIAS */
 
+.photographer-medias-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 20%;
+    width: 100%;
+}
+
+.photographer-article {
+    width: 200px;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+
+.photographer-article h3 {
+    margin-top: 10px;
+}
+
+.photographer-article img,
+.photographer-article video {
+    object-fit: cover;
+    width: 350px;
+    height: 350px;
+    border-radius: 8px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.photographer-article-text {
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    color: #901c1c;
+    font-size: 20px;
+    padding-top: 10px;
+
+}
+
+.photographer-article-text h3 {
+    width: 100%;
+    margin-top: 0;
+}
+
+
+/* Items Hearts and likes */
+
+.photographer-article-like-counter,
+.photographer-article-like-icon {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 0;
+}
+
+.photographer-article-like-icon {
+    padding-left: 0;
+    margin-left: 0;
+    position: relative;
+}
+
+
 /* CONTACT FORM */
 
 #contact-modal {

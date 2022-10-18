@@ -71,59 +71,59 @@ function photographerFactory(data) {
 
 //------------------------------------------------
 
-// // 2 - FACTORY JSON MEDIA
-// // link with photographer data from photographer.json
-// function mediaFactory(data) {
-//     const {
-//         photographerId,
-//         title,
-//         image,
-//         likes,
-//         video,
-//     } = data;
+// 2 - FACTORY JSON MEDIA
+// link with photographer data from photographer.json
+function mediaFactory(data) {
+    const {
+        photographerId,
+        title,
+        image,
+        likes,
+        video,
+    } = data;
 
-//     // links medias in files project
-//     const Image = `<img src="./assets/images/${photographerId}/${image}"/>`;
-//     const Video = `<video><source src="./assets/images/${photographerId}/${video}#t=5.0" type="video/mp4"></video>`;
-//     // create a variable for choosing to display video or image
-//     let mediaStyle
-//     // si image = false on va chercher la vidéo sinon on affiche l'id image
-//     if (!image) {
-//         mediaStyle = Video
-//     } else {
-//         mediaStyle = Image
-//     }
+    // links medias in files project
+    const Image = `<img src="./assets/images/${photographerId}/${image}"/>`;
+    const Video = `<video><source src="./assets/images/${photographerId}/${video}#t=5.0" type="video/mp4"></video>`;
+    // create a variable for choosing to display video or image
+    let mediaStyle
+    // si image = false on va chercher la vidéo sinon on affiche l'id image
+    if (!image) {
+        mediaStyle = Video
+    } else {
+        mediaStyle = Image
+    }
 
-//     function getMediaFactory() {
-//         const photographerMedias = document.querySelector("".photographer-medias-container")
-//         // create a new article balise in html
-//         photographerMedias = document.createElement('article')
-//         // add a class id to the article
-//         photographerMedias.classList.add('photographer-article')
-//         photographerMedias.innerHTML +=
-//             `
-//           ${mediaStyle}
-//           <div class="photographer-article-text">
-//             <h3>${title}</h3>
-//             <ul class="photographer-article-like-counter">
-//             <li>${likes}</li>
-//             </ul>
-//             <ul class="photographer-article-like-icon">
-//             <li><i class="fa-regular fa-heart"></i></i></li>
-//             <li><i class="fa-solid fa-heart"></i></li>
-//             </ul>
-//           </div>
-//     `
-//         // display new html for checking if $media is video or image
-//         return (photographerMedias)
-//     }
-//     // display all new html creating
-//     return {
-//         photographerId,
-//         title,
-//         image,
-//         likes,
-//         video,
-//         getMediaFactory
-//     }
-// };
+    function getMediaFactory() {
+        const photographerMedias = document.querySelector(".photographer-medias-container")
+        // create a new article balise in html
+        const photographerMediasArticle = document.createElement('article')
+        // add a class id to the article
+        photographerMediasArticle.classList.add('photographer-article')
+        photographerMediasArticle.innerHTML +=
+            `
+          ${mediaStyle}
+          <div class="photographer-article-text">
+            <h3>${title}</h3>
+            <ul class="photographer-article-like-counter">
+            <li>${likes}</li>
+            </ul>
+            <ul class="photographer-article-like-icon">
+            <li><i class="fa-regular fa-heart"></i></i></li>
+            <li><i class="fa-solid fa-heart"></i></li>
+            </ul>
+          </div>
+    `
+        // display new html for checking if $media is video or image
+        return (photographerMediasArticle)
+    }
+    // display all new html creating
+    return {
+        photographerId,
+        title,
+        image,
+        likes,
+        video,
+        getMediaFactory
+    }
+};
