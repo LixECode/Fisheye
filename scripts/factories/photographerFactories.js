@@ -1,3 +1,5 @@
+//----------INDEX
+
 // 1 - FACTORY JSON PHOTOGRAPHERS 
 function photographerFactory(data) {
     const {
@@ -13,7 +15,7 @@ function photographerFactory(data) {
     // 2 - FACTORY PORTRAIT 
     const picture = `assets/photographers/${portrait}`;
 
-    function getPhotographerPortrait() {
+    function getUserCardDOM() {
         const photographerPortrait = document.createElement("article");
         photographerPortrait.innerHTML =
             `
@@ -26,6 +28,33 @@ function photographerFactory(data) {
         // display the new article balise created
         return (photographerPortrait);
     }
+
+    //----------PAGE PHOTOGRAPHER
+
+    // // FACTORY PORTRAIT SUBLINES PHOTOGRAPHER
+
+    // get media data from photographers.json with portrait sublines photographer on Index page in html
+    function getPhotographerHeader() {
+        // search in html the class for creating new div inside in html
+        const photographerHeader = document.querySelector('.photographer-header')
+        // create a div balise in html
+        const photographerHeaderContainer = document.createElement('div')
+        // add a id class to the div
+        photographerHeaderContainer.classList.add('photographer-header-container')
+        // create the html in div balise with id variable of media data from photographers.json
+        photographerHeaderContainer.innerHTML =
+            `
+    <div class="photographer-header-container-portrait">
+    <h2 class="portrait-name">${name}</h2>
+    <p class="portrait-city">${city}, ${country}</p>
+    <p class="portrait-tagline">${tagline}</p>
+    </div>
+    <button class="contact-button" onclick="displayModal()">Contactez-moi</button>
+    <img class="portrait-img" src="${picture}" alt="${id}" title="picture of" + "${id}">
+        `
+        return (photographerHeaderContainer)
+    }
+    // display the new div balise created with variables tags inside
     return {
         name,
         id,
@@ -35,9 +64,12 @@ function photographerFactory(data) {
         price,
         portrait,
         picture,
-        getPhotographerPortrait
+        getUserCardDOM,
+        getPhotographerHeader
     }
-}
+};
+
+//------------------------------------------------
 
 // 2 - FACTORY JSON MEDIA
 // link with photographer data from photographer.json
@@ -63,12 +95,12 @@ function mediaFactory(data) {
     }
 
     function getMediaFactory() {
-        const photographerMedias = document.querySelector('photographer-medias')
+        const photographerMedias = document.querySelector(".photographer-medias-container")
         // create a new article balise in html
-        photographerMedias = document.createElement('article')
+        const photographerMediasArticle = document.createElement('article')
         // add a class id to the article
-        photographerMedias.classList.add('photographer-article')
-        photographerMedias.innerHTML +=
+        photographerMediasArticle.classList.add('photographer-article')
+        photographerMediasArticle.innerHTML +=
             `
           ${mediaStyle}
           <div class="photographer-article-text">
@@ -83,7 +115,7 @@ function mediaFactory(data) {
           </div>
     `
         // display new html for checking if $media is video or image
-        return (photographerMedias)
+        return (photographerMediasArticle)
     }
     // display all new html creating
     return {

@@ -1,5 +1,5 @@
     // 1 - FONCTION LINK ENTRE DATA PHOTOGRAPHERS ET FACTORIES
-    const getPhotographersData =
+    const getPhotographerIndexData =
         // on créer une fonction
         async function () { // attendre un retour (def)
             try {
@@ -31,27 +31,27 @@
     // 2 - FONCTION LINK ENTRE FACTORIES ET INIT
     // je créé une fonction qui attend le retour de l'init pour afficher les données
     // fonction d'affichage lié à photographers défini dans photographerFactories
-    async function displayPhotographersData(photographers) {
+    async function displayPhotographerIndexData(photographers) {
         // var qui va dans la div photographer_section
-        const photographersSection = document.querySelector(".photographer_section");
+        const photographersSection = document.querySelector(".photographer-section");
         // pour chaque donnée dans photographers on définié un photographer 
         photographers.forEach((photographer) => {
             // var de création de model et le lier au factory de photographers
             const photographerModel = photographerFactory(photographer);
             // variable qui relie l'affichage du factory portrait
-            const photographerUserCard = photographerModel.getPhotographerPortrait();
-            // appendchild qui affiche les données définies dans getphotographerPortrait dans photographer_section
+            const photographerUserCard = photographerModel.getUserCardDOM();
+            // appendchild qui affiche les données définies dans getUserCardDOM dans photographer_section
             photographersSection.appendChild(photographerUserCard);
         });
     };
     // 3 - FONCTION LINK ENTRE INIT ET AFFICHAGE HTML
     //  init est appelé après que toutes les déclarations de variables du package ont évalué leurs initialiseurs, et ceux-ci ne sont évalués qu'après que tous les packages importés ont été initialisés.
     async function init() {
-        // Récupère les datas des photographes
+        // Récupère les datas des photographes et les affiche
         const {
             photographers
-        } = await getPhotographersData();
-        displayPhotographersData(photographers);
+        } = await getPhotographerIndexData();
+        displayPhotographerIndexData(photographers);
     };
 
     init();
