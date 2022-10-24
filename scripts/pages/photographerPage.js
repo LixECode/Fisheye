@@ -55,6 +55,7 @@ async function init() {
         photographers
     } = await getPhotographerPageData();
     displayPhotographerPageData(media, photographers);
+    getLikes()
 };
 
 init();
@@ -96,5 +97,26 @@ async function displayPhotographerPageData(media, photographers) {
         photographersMediaContainer.appendChild(PhotographerMediaContainerUser);
     });
 
-
 };
+
+//DISPLAY LIKES EVENT
+function getLikes() {
+    const likeButton = document.querySelectorAll('.photographer-article-like-icon')
+    const heartSolid = document.querySelector(".fa-solid")
+    console.log(likeButton)
+    //  1 EVENT
+    likeButton.forEach(function (e) {
+        e.addEventListener("click", function () {})
+    })
+};
+
+// for each de chaque ul de likes
+// ad event listener de clicl
+// si le like est cliqué donc active
+// alors le le fa regular est color rouge
+// if un autre click est activé
+// alors le premier click redvient color transparent et le 2nd click devient color rouge
+// 2 ajouter + 1 au total des likes
+// if click is active alors ajouter +1 au totalcounter
+// if le click est desactive
+// alors c'est -1 au totalcounter
