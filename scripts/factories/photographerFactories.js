@@ -105,13 +105,15 @@ function mediaFactory(data) {
           ${mediaStyle}
           <div class="photographer-article-text">
             <h3>${title}</h3>
+            <div class="photographer-article-like">
             <ul class="photographer-article-like-counter">
             <li>${likes}</li>
             </ul>
             <ul class="photographer-article-like-icon">
             <li><i class="fa-regular fa-heart"></i></i></li>
-            <li><i class="fa-solid fa-heart"></i></li>
+            <li><i class="fa-solid fa-heart active"></i></li>
             </ul>
+            </div>
           </div>
     `
         // display new html for checking if $media is video or image
