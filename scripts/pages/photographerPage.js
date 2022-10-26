@@ -97,26 +97,40 @@ async function displayPhotographerPageData(media, photographers) {
         photographersMediaContainer.appendChild(PhotographerMediaContainerUser);
     });
 
+    //NAV CONTAINER
+
+    const photographerNav = document.querySelector('.photographer-nav-container')
+    let like = 0;
+    // for each media declaring behand, we create a function linking to media from photographers.json
+    // and count the total of likes
+    media.forEach(function (totalLikes) {
+        like += totalLikes.likes;
+    })
+    console.log(like)
+    console.log(photographerNav)
+
+    const photographerNavModel = navFactory({
+        price: photographerId.price,
+        likes: like
+    });
+    const photographerNavDisplay = photographerNavModel.getNavFactory();
+    photographerNav.appendChild(photographerNavDisplay);
+
 };
 
 //DISPLAY LIKES EVENT
 function getLikes() {
     const likeButton = document.querySelectorAll('.photographer-article-like-icon')
-    const heartSolid = document.querySelector(".fa-solid")
+    const heart = document.querySelector(".fa-regular")
+    const heartSolidActive = document.querySelector(".active")
     console.log(likeButton)
     //  1 EVENT
-    likeButton.forEach(function (e) {
-        e.addEventListener("click", function () {})
+    likeButton.forEach(function (likeButtonActive) {
+        likeButtonActive.addEventListener("click", function () {
+            console.log('teest')
+        })
     })
 };
 
-// for each de chaque ul de likes
-// ad event listener de clicl
-// si le like est cliqué donc active
-// alors le le fa regular est color rouge
-// if un autre click est activé
-// alors le premier click redvient color transparent et le 2nd click devient color rouge
-// 2 ajouter + 1 au total des likes
-// if click is active alors ajouter +1 au totalcounter
-// if le click est desactive
-// alors c'est -1 au totalcounter
+// si click alors fa heart devient coeur solid
+// si fa-heart est déjà = à coeur solid alors il redevient coeur regular

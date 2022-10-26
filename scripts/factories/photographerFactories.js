@@ -110,8 +110,8 @@ function mediaFactory(data) {
             <li>${likes}</li>
             </ul>
             <ul class="photographer-article-like-icon">
-            <li><i class="fa-regular fa-heart"></i></i></li>
-            <li><i class="fa-solid fa-heart active"></i></li>
+            <li><i class="fa-regular fa-heart fa-like"></i></i></li>
+            <li><i class="fa-solid fa-heart fa-like"></i></li>
             </ul>
             </div>
           </div>
@@ -128,4 +128,39 @@ function mediaFactory(data) {
         video,
         getMediaFactory
     }
+};
+
+// FACTORY PAGE PHOTOGRAPHER NAV
+
+// link media in photographers.json with nav 
+function navFactory(data) {
+    const {
+        price,
+        likes
+    } = data;
+
+    // get media in photographers.jason with html
+    function getNavFactory() {
+        const photographerNav = document.createElement('div')
+        // add class to th new div
+        photographerNav.classList.add('photographer-nav')
+        // create the html of the new div with tags variable data
+        photographerNav.innerHTML =
+            `
+      <ul class="photographer-nav-like">
+        <li>${likes}</li>
+        <li><i class="fa-solid fa-heart"></i></li>
+      </ul>
+      <p>${price}€ / jour</p>
+          `
+        // display new div checking likes and prices
+        return (photographerNav)
+    }
+    // display all new html creating
+    return {
+        price,
+        likes,
+        getNavFactory
+    }
+
 };
