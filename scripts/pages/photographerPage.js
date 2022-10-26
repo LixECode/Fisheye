@@ -55,7 +55,7 @@ async function init() {
         photographers
     } = await getPhotographerPageData();
     displayPhotographerPageData(media, photographers);
-    getLikes()
+    // getLikes()
 };
 
 init();
@@ -97,6 +97,25 @@ async function displayPhotographerPageData(media, photographers) {
         photographersMediaContainer.appendChild(PhotographerMediaContainerUser);
     });
 
+    // LIKES 
+    const likeButton = document.querySelectorAll('.photographer-article-like')
+    const heart = document.querySelector('.fa-like')
+    const heartSolid = document.querySelector('.fa-solid')
+    const likeCounterText = document.querySelector('.photographer-article-like-counter li')
+    const totalLikes = document.querySelector('.photographer-nav-like-total')
+    likeButton.forEach(function (likeButtonEvent) {
+        likeButtonEvent.addEventListener("click", function () {
+            photographerMediaArticle.forEach(function (likeCounter) {
+                let numero = likeCounter.likes;
+                console.log(likeCounter.likes)
+                likeCounterText = photographerId.likes
+
+
+
+            })
+        })
+    })
+
     //NAV CONTAINER
 
     const photographerNav = document.querySelector('.photographer-nav-container')
@@ -115,22 +134,40 @@ async function displayPhotographerPageData(media, photographers) {
     });
     const photographerNavDisplay = photographerNavModel.getNavFactory();
     photographerNav.appendChild(photographerNavDisplay);
-
 };
 
 //DISPLAY LIKES EVENT
-function getLikes() {
-    const likeButton = document.querySelectorAll('.photographer-article-like-icon')
-    const heart = document.querySelector('.fa-like')
-    const heartSolid = document.querySelector('.fa-solid')
-    console.log(likeButton)
-    //  1 EVENT
-    likeButton.forEach(function (likeButtonActive) {
-        likeButtonActive.addEventListener("click", function () {
-            console.log('teest')
-        })
-    })
-};
+// function getLikes() {
 
-// si click alors fa heart devient coeur solid
-// si fa-heart est déjà = à coeur solid alors il redevient coeur regular
+//     console.log(likeButton)
+//     //  1 EVENT
+//     // likeButton.forEach(function (likeButtonEvent) {
+//     //     likeButtonEvent.addEventListener("click", function () {
+//     //         likeCounterText = media.likes
+//     //         console.log(likeCounterText)
+//     //         let likeCounter = parseInt(likeCounterText)
+//     //         console.log(likeCounter)
+//     //         console.log(typeof likeCounter)
+//     //     })
+//     // })
+// }
+// const numero = likeButtonCounter.closest('.photographer-article-text').querySelector('.photographer-article-like-icon li')
+// let numeroPlus = parseInt(numero.textContent)
+// let totalLikesPlus = parseInt(totalLikes.textContent)
+// console.log('teest')
+// // si c'est pas cocher (checked = 0)
+// // si c'est checked = + 1
+// // like ++ ou rien du tout
+// if (likeButtonCounter.classList.contains('active')) {
+//     numeroPlus--
+//     totalLikesPlus--
+//     // otherwise, like adds 1
+// } else {
+//     numeroPlus++
+//     totalLikesPlus++
+// }
+// // declare thant our new vaiable number = text of our cont numero. same for totallikesplus
+// numero.textContent = numeroPlus
+// totalLikes.textContent = totalLikesPlus
+// // add .toggle to play with the active css class and create the click on, click off
+// likeButtonCounter.classList.toggle('active')

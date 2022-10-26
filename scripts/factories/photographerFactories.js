@@ -148,7 +148,7 @@ function navFactory(data) {
         photographerNav.innerHTML =
             `
       <ul class="photographer-nav-like">
-        <li>${likes}</li>
+        <li class="photographer-nav-like-total">${likes}</li>
         <li><i class="fa-solid fa-heart"></i></li>
       </ul>
       <p>${price}€ / jour</p>

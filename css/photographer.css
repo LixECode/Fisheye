@@ -159,15 +159,6 @@
     cursor: pointer;
 }
 
-.photographer-article-like-icon[data-error]::after {
-    content: attr(data-error);
-    color: #901c1c;
-}
-
-.photographer-article-like-icon[data-error-visible="true"]::after {
-    opacity: 1;
-}
-
 .fa-like {
     position: absolute;
     top: 0px;
