@@ -121,8 +121,8 @@ async function displayPhotographerPageData(media, photographers) {
 //DISPLAY LIKES EVENT
 function getLikes() {
     const likeButton = document.querySelectorAll('.photographer-article-like-icon')
-    const heart = document.querySelector(".fa-regular")
-    const heartSolidActive = document.querySelector(".active")
+    const heart = document.querySelector('.fa-like')
+    const heartSolid = document.querySelector('.fa-solid')
     console.log(likeButton)
     //  1 EVENT
     likeButton.forEach(function (likeButtonActive) {
