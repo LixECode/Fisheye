@@ -88,6 +88,8 @@ async function displayPhotographerPageData(media, photographers) {
         // ici on dit que le retour du photographerID doit être celui du search params id
         return findMedia.photographerId == urlId;
     });
+
+
     console.log(photographerMediaArticle)
     const photographersMediaContainer = document.querySelector(".photographer-medias-container")
     // we use for each to display the exact number of media for each ID. no need to create 10 articles balise in html.
@@ -96,25 +98,6 @@ async function displayPhotographerPageData(media, photographers) {
         const PhotographerMediaContainerUser = photographerMediasContainerModel.getMediaFactory();
         photographersMediaContainer.appendChild(PhotographerMediaContainerUser);
     });
-
-    // LIKES 
-    const likeButton = document.querySelectorAll('.photographer-article-like')
-    const heart = document.querySelector('.fa-like')
-    const heartSolid = document.querySelector('.fa-solid')
-    const likeCounterText = document.querySelector('.photographer-article-like-counter li')
-    const totalLikes = document.querySelector('.photographer-nav-like-total')
-    likeButton.forEach(function (likeButtonEvent) {
-        likeButtonEvent.addEventListener("click", function () {
-            photographerMediaArticle.forEach(function (likeCounter) {
-                let numero = likeCounter.likes;
-                console.log(likeCounter.likes)
-                likeCounterText = photographerId.likes
-
-
-
-            })
-        })
-    })
 
     //NAV CONTAINER
 
@@ -125,8 +108,8 @@ async function displayPhotographerPageData(media, photographers) {
     media.forEach(function (totalLikes) {
         like += totalLikes.likes;
     })
-    console.log(like)
-    console.log(photographerNav)
+    console.log(like);
+    console.log(photographerNav);
 
     const photographerNavModel = navFactory({
         price: photographerId.price,
@@ -134,6 +117,31 @@ async function displayPhotographerPageData(media, photographers) {
     });
     const photographerNavDisplay = photographerNavModel.getNavFactory();
     photographerNav.appendChild(photographerNavDisplay);
+
+    // LIKES 
+    const likeButton = document.querySelectorAll('.photographer-article-like-icon')
+    const likeCounterText = document.querySelector('.likes')
+    likeButton.forEach(function (e) {
+        e.addEventListener('click', function () {
+            console.log(likeButton)
+            const {
+                liked
+            } = likeCounterText.dataset;
+            console.log(likeCounterText.innerText)
+            if (liked === 'false') {
+                media.likes += 1
+                likeCounterText.dataset.liked = true;
+                console.log(media.likes)
+                console.log(likeCounterText.innerText)
+            } else {
+                likeCounterText.dataset.liked = false;
+                media.likes -= 1
+                console.log(media.likes)
+                console.log(likeCounterText.innerText)
+            }
+            likeCounterText.innerText = media.likes;
+        })
+    })
 };
 
 //DISPLAY LIKES EVENT
