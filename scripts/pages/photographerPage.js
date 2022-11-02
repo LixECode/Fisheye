@@ -55,7 +55,7 @@ async function init() {
         photographers
     } = await getPhotographerPageData();
     displayPhotographerPageData(media, photographers);
-    getLikes()
+    // getLikes()
 };
 
 init();
@@ -88,6 +88,8 @@ async function displayPhotographerPageData(media, photographers) {
         // ici on dit que le retour du photographerID doit être celui du search params id
         return findMedia.photographerId == urlId;
     });
+
+
     console.log(photographerMediaArticle)
     const photographersMediaContainer = document.querySelector(".photographer-medias-container")
     // we use for each to display the exact number of media for each ID. no need to create 10 articles balise in html.
@@ -97,26 +99,83 @@ async function displayPhotographerPageData(media, photographers) {
         photographersMediaContainer.appendChild(PhotographerMediaContainerUser);
     });
 
-};
+    //NAV CONTAINER
 
-//DISPLAY LIKES EVENT
-function getLikes() {
+    const photographerNav = document.querySelector('.photographer-nav-container')
+    let like = 0;
+    // for each media declaring behand, we create a function linking to media from photographers.json
+    // and count the total of likes
+    media.forEach(function (totalLikes) {
+        like += totalLikes.likes;
+    })
+    console.log(like);
+    console.log(photographerNav);
+
+    const photographerNavModel = navFactory({
+        price: photographerId.price,
+        likes: like
+    });
+    const photographerNavDisplay = photographerNavModel.getNavFactory();
+    photographerNav.appendChild(photographerNavDisplay);
+
+    // LIKES 
     const likeButton = document.querySelectorAll('.photographer-article-like-icon')
-    const heartSolid = document.querySelector(".fa-solid")
-    console.log(likeButton)
-    //  1 EVENT
+    const likeCounterText = document.querySelector('.likes')
     likeButton.forEach(function (e) {
-        e.addEventListener("click", function () {})
+        e.addEventListener('click', function () {
+            console.log(likeButton)
+            const {
+                liked
+            } = likeCounterText.dataset;
+            console.log(likeCounterText.innerText)
+            if (liked === 'false') {
+                media.likes += 1
+                likeCounterText.dataset.liked = true;
+                console.log(media.likes)
+                console.log(likeCounterText.innerText)
+            } else {
+                likeCounterText.dataset.liked = false;
+                media.likes -= 1
+                console.log(media.likes)
+                console.log(likeCounterText.innerText)
+            }
+            likeCounterText.innerText = media.likes;
+        })
     })
 };
 
-// for each de chaque ul de likes
-// ad event listener de clicl
-// si le like est cliqué donc active
-// alors le le fa regular est color rouge
-// if un autre click est activé
-// alors le premier click redvient color transparent et le 2nd click devient color rouge
-// 2 ajouter + 1 au total des likes
-// if click is active alors ajouter +1 au totalcounter
-// if le click est desactive
-// alors c'est -1 au totalcounter
+//DISPLAY LIKES EVENT
+// function getLikes() {
+
+//     console.log(likeButton)
+//     //  1 EVENT
+//     // likeButton.forEach(function (likeButtonEvent) {
+//     //     likeButtonEvent.addEventListener("click", function () {
+//     //         likeCounterText = media.likes
+//     //         console.log(likeCounterText)
+//     //         let likeCounter = parseInt(likeCounterText)
+//     //         console.log(likeCounter)
+//     //         console.log(typeof likeCounter)
+//     //     })
+//     // })
+// }
+// const numero = likeButtonCounter.closest('.photographer-article-text').querySelector('.photographer-article-like-icon li')
+// let numeroPlus = parseInt(numero.textContent)
+// let totalLikesPlus = parseInt(totalLikes.textContent)
+// console.log('teest')
+// // si c'est pas cocher (checked = 0)
+// // si c'est checked = + 1
+// // like ++ ou rien du tout
+// if (likeButtonCounter.classList.contains('active')) {
+//     numeroPlus--
+//     totalLikesPlus--
+//     // otherwise, like adds 1
+// } else {
+//     numeroPlus++
+//     totalLikesPlus++
+// }
+// // declare thant our new vaiable number = text of our cont numero. same for totallikesplus
+// numero.textContent = numeroPlus
+// totalLikes.textContent = totalLikesPlus
+// // add .toggle to play with the active css class and create the click on, click off
+// likeButtonCounter.classList.toggle('active')

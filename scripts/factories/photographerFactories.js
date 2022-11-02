@@ -100,19 +100,17 @@ function mediaFactory(data) {
         const photographerMediasArticle = document.createElement('article')
         // add a class id to the article
         photographerMediasArticle.classList.add('photographer-article')
+        photographerMediasArticle.dataset.liked = false;
         photographerMediasArticle.innerHTML +=
             `
           ${mediaStyle}
           <div class="photographer-article-text">
             <h3>${title}</h3>
             <div class="photographer-article-like">
-            <ul class="photographer-article-like-counter">
-            <li>${likes}</li>
-            </ul>
-            <ul class="photographer-article-like-icon">
-            <li><i class="fa-regular fa-heart"></i></i></li>
-            <li><i class="fa-solid fa-heart active"></i></li>
-            </ul>
+            <span class="likes">${likes}</span>
+            <button class="photographer-article-like-icon">
+           <i class="fa-solid fa-heart fa-like"></i>
+            </button>
             </div>
           </div>
     `
@@ -128,4 +126,39 @@ function mediaFactory(data) {
         video,
         getMediaFactory
     }
+};
+
+// FACTORY PAGE PHOTOGRAPHER NAV
+
+// link media in photographers.json with nav 
+function navFactory(data) {
+    const {
+        price,
+        likes
+    } = data;
+
+    // get media in photographers.jason with html
+    function getNavFactory() {
+        const photographerNav = document.createElement('div')
+        // add class to th new div
+        photographerNav.classList.add('photographer-nav')
+        // create the html of the new div with tags variable data
+        photographerNav.innerHTML =
+            `
+      <ul class="photographer-nav-like">
+        <li class="photographer-nav-like-total">${likes}</li>
+        <li><i class="fa-solid fa-heart"></i></li>
+      </ul>
+      <p>${price}€ / jour</p>
+          `
+        // display new div checking likes and prices
+        return (photographerNav)
+    }
+    // display all new html creating
+    return {
+        price,
+        likes,
+        getNavFactory
+    }
+
 };

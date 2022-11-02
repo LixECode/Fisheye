@@ -155,30 +155,73 @@
 }
 
 .photographer-article-like-icon {
+    background: none;
+    border: none;
     margin-left: 0;
     cursor: pointer;
 }
 
-.fa-heart {
+.fa-like {
     position: absolute;
     top: 0px;
     right: 0px;
     font-size: 25px;
 }
 
+.fa-regular {
+    color: transparent;
+    opacity: 0;
+}
+
 .fa-solid {
-    color: transparent;
-    opacity: 0;
-}
-
-.fa-regular:hover {
-    color: transparent;
-    opacity: 0;
-}
-
-.fa-solid:hover {
-    opacity: 1;
     color: #901c1c;
+}
+
+/* NAV CONTAINER */
+
+.photographer-nav-container {
+    background-color: #db8876;
+    width: 400px;
+    height: 80px;
+    font-size: 25px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: fixed;
+    bottom: -1px;
+    right: 40px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+
+}
+
+.photographer-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}
+
+.photographer-nav .fa-heart {
+    color: black;
+}
+
+
+.photographer-nav ul {
+    list-style: none;
+}
+
+.photographer-nav-like {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 23%;
+
+}
+
+.photographer-nav p {
+    margin-right: 30px;
 }
 
 /* CONTACT FORM */
