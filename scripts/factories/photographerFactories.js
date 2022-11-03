@@ -100,17 +100,16 @@ function mediaFactory(data) {
         const photographerMediasArticle = document.createElement('article')
         // add a class id to the article
         photographerMediasArticle.classList.add('photographer-article')
-        photographerMediasArticle.dataset.liked = false;
         photographerMediasArticle.innerHTML +=
             `
           ${mediaStyle}
           <div class="photographer-article-text">
             <h3>${title}</h3>
             <div class="photographer-article-like">
-            <span class="likes">${likes}</span>
-            <button class="photographer-article-like-icon">
-           <i class="fa-solid fa-heart fa-like"></i>
-            </button>
+                <span class="likes">${likes}</span>
+                <button class="photographer-article-like-icon">
+                    <i class="fa-solid fa-heart fa-like"></i>
+                </button>
             </div>
           </div>
     `

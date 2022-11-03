@@ -55,7 +55,6 @@ async function init() {
         photographers
     } = await getPhotographerPageData();
     displayPhotographerPageData(media, photographers);
-    // getLikes()
 };
 
 init();
@@ -63,7 +62,7 @@ init();
 // 2 - FONCTION LINK ENTRE FACTORIES ET INIT
 // je créé une fonction qui attend le retour de l'init pour afficher les données
 // fonction d'affichage lié à photographers défini dans photographerFactories
-async function displayPhotographerPageData(media, photographers) {
+async function displayPhotographerPageData(medias, photographers) {
     // var qui va dans la div photographer_header
     const photographerHeader = document.querySelector(".photographer-header");
     console.log(photographerHeader)
@@ -84,7 +83,7 @@ async function displayPhotographerPageData(media, photographers) {
     // FILTER MENU
 
     //MEDIA CONTAINER
-    const photographerMediaArticle = media.filter(function (findMedia) {
+    const photographerMediaArticle = medias.filter(function (findMedia) {
         // ici on dit que le retour du photographerID doit être celui du search params id
         return findMedia.photographerId == urlId;
     });
@@ -105,8 +104,8 @@ async function displayPhotographerPageData(media, photographers) {
     let like = 0;
     // for each media declaring behand, we create a function linking to media from photographers.json
     // and count the total of likes
-    media.forEach(function (totalLikes) {
-        like += totalLikes.likes;
+    photographerMediaArticle.forEach(function (media) {
+        like += media.likes;
     })
     console.log(like);
     console.log(photographerNav);
@@ -119,30 +118,88 @@ async function displayPhotographerPageData(media, photographers) {
     photographerNav.appendChild(photographerNavDisplay);
 
     // LIKES 
-    const likeButton = document.querySelectorAll('.photographer-article-like-icon')
-    const likeCounterText = document.querySelector('.likes')
-    likeButton.forEach(function (e) {
-        e.addEventListener('click', function () {
-            console.log(likeButton)
-            const {
-                liked
-            } = likeCounterText.dataset;
-            console.log(likeCounterText.innerText)
-            if (liked === 'false') {
-                media.likes += 1
-                likeCounterText.dataset.liked = true;
-                console.log(media.likes)
-                console.log(likeCounterText.innerText)
+    const likeButtons = document.querySelectorAll('.photographer-article-like-icon')
+    // Pour tous les boutons coeur
+    likeButtons.forEach(function (likeButton) {
+        // je créé un event click
+        likeButton.addEventListener('click', function (event) {
+            // current target : sur quoi j'ai cliqué l'element qui a déclenché l'event donc recuperer tt ce qui a derrière
+            const button = event.currentTarget
+            const counter = button.closest('.photographer-article-like').querySelector('.likes')
+            const totalCounter = document.querySelector('.photographer-nav-like-total')
+            let likes = parseInt(counter.innerText)
+            let totalLikes = parseInt(totalCounter.innerText)
+            if (button.dataset.liked === "1") {
+                button.dataset.liked = "0"
+                likes--
+                totalLikes--
             } else {
-                likeCounterText.dataset.liked = false;
-                media.likes -= 1
-                console.log(media.likes)
-                console.log(likeCounterText.innerText)
+                button.dataset.liked = "1"
+                likes++
+                totalLikes++
             }
-            likeCounterText.innerText = media.likes;
+            counter.innerText = likes
+            totalCounter.innerText = totalLikes
         })
     })
+
+    // FILTERS MENU
+
+    const filterTotal = document.querySelector('.filter-total')
+    // add event on filter menu of filters medias in photographer page
+    filterTotal.addEventListener("click", function () {
+        const filterChoices = document.querySelector('.filter-choices')
+        // play with to css class none (dislay: none) or active for go or back the click of header of filter menu
+        filterChoices.classList.toggle('none')
+        filterTotal.classList.toggle('active')
+    })
+
+    const filterChoicesTable = document.querySelectorAll('.filter-choices button')
+    filterChoicesTable.forEach(function (choice) {
+        // create an event for choices of filter menu
+        choice.addEventListener("click", function () {
+            console.log('coucou')
+            // back to the old 
+            const filterChoiceButton = document.querySelector('.filter-choices .none')
+            filterChoiceButton.classList.remove('none')
+            // hidden the button on click
+            choice.classList.add('none')
+            // change the title of header of filter menu
+            const filterChoiceTotalText = choice.textContent
+            filterTotal.querySelector('span').textContent = filterChoiceTotalText
+        })
+
+    })
 };
+
+//         console.log(likeButton)
+//         // au click je créé une const liked qui est liée au data de likeCounterText (donc du span du nombre)
+//         const {
+//             liked
+//         } = likeCounterText.dataset;
+//         let number = parseInt(likeCounterText.dataset)
+//         console.log(typeof number)
+//         // ma const nombre est string
+//         // si mon nombre.liked est false 
+//         if (liked === 'false') {
+//             // on ajoute + 1 au nombre
+//             number.innerText += 1
+//             // mon data-liked is true
+//             likeCounterText.dataset.liked = true;
+//             console.log(media.likes)
+//             console.log(likeCounterText.innerText)
+//             // sinon 
+//         } else {
+//             // mon data-liked is false
+//             likeCounterText.dataset.liked = false;
+//             // on ajouter - 1 au nombre
+//             number.innerText -= 1
+//             console.log(media[0].likes)
+//             console.log(likeCounterText.innerText)
+//         }
+//         likeCounterText.innerText = media.likes;
+//     })
+// })
 
 //DISPLAY LIKES EVENT
 // function getLikes() {

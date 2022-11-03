@@ -79,16 +79,29 @@
     align-items: center;
 }
 
-.filter-container .filter-date {
-    border-top: solid 1px white;
-    border-bottom: solid 1px white;
-}
-
 .filter-container .filter-popularity,
 .filter-container .filter-date,
 .filter-container .filter-title {
     cursor: pointer;
+    border-top: solid 1px white;
 }
+
+.filter-total i {
+    color: white;
+}
+
+.filter-total.active i {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
+
+.none {
+    display: none !important;
+}
+
 
 /* MEDIAS */
 
